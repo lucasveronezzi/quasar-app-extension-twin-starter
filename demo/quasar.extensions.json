@@ -1,0 +1,13 @@
+{
+  "twin-starter": {
+    "baseUrl": "http://localhost/api",
+    "apiClientId": "",
+    "apiClientSecret": "",
+    "changeRoutesApi": "no",
+    "mockApi": true,
+    "authScheme": "nothing",
+    "authIndetifierField": "username",
+    "routerNested": true,
+    "splashscreen": true
+  }
+}
