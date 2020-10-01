@@ -18,31 +18,11 @@
           </template>
         </q-input>
 
-        <q-input
-          v-model="password"
-          outlined
-          autocomplete
-          bg-color="white"
-          :type="isPwd ? 'password' : 'text'"
-          :label="$twin.i18n.t('label.password')"
-          :rules="[ $twin.rules.required() ]"
-        >
-          <template v-slot:prepend>
-            <q-icon name="las la-lock" />
-          </template>
-
-          <template v-slot:append>
-            <q-icon
-              :name="isPwd ? 'las la-low-vision' : 'las la-eye'"
-              class="cursor-pointer"
-              @click="isPwd = !isPwd"
-            />
-          </template>
-        </q-input>
+        <t-input-password v-model="password" />
       </q-card-section>
 
       <q-card-actions vertical class="text-caption text-grey-9 q-pa-md q-mb-lg">
-        <q-btn type="submit" :loading="loading" :label="$twin.i18n.t('label.logIn')" color="primary" />
+        <q-btn type="submit" :loading="loading" :label="$twin.i18n.t('btn.logIn')" color="primary" />
 
         <hr color="#e0e0e0" class="q-my-md full-width" />
 
@@ -52,7 +32,7 @@
             tag="a"
             class="text-grey-7 not-hover"
             align="center"
-            >{{ $twin.i18n.t('page.login.forgotPassword') }}
+            >{{ $twin.i18n.t('page.login.passwordForgot') }}
           </router-link>
         </div>
 
@@ -73,8 +53,12 @@
 </template>
 
 <script>
+import TInputPassword from 'twin-starter/components/TInputPassword.vue'
+
 export default {
   name: 'LoginPage',
+
+  components: { TInputPassword },
 
   data () {
     return {

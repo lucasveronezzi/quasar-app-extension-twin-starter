@@ -12,51 +12,12 @@
         </q-card-section>
 
         <q-card-section>
-          <q-input
-            v-model="form.password"
-            label="Senha"
-            :type="isPwd ? 'password' : 'text'"
-            bg-color="white"
-            class="q-mb-md"
-            outlined
-            autocomplete
-            :rules="[ $twin.rules.required() ]"
-          >
-            <template v-slot:prepend>
-              <q-icon name="las la-lock" />
-            </template>
+          <t-input-password v-model="form.password" />
 
-            <template v-slot:append>
-              <q-icon
-                :name="isPwd ? 'las la-low-vision' : 'las la-eye'"
-                class="cursor-pointer"
-                @click="isPwd = !isPwd"
-              />
-            </template>
-          </q-input>
-
-          <q-input
-            v-model="form.passwordConfirm"
-            label="Confirmar Senha"
-            :type="isPwd2 ? 'password' : 'text'"
-            bg-color="white"
-            :rules="[ $twin.rules.required(), $twin.rules.sameAs(form.password, 'Confirmação de senha não confere') ]"
-            outlined
-            required
-            autocomplete
-          >
-            <template v-slot:prepend>
-              <q-icon name="las la-lock" />
-            </template>
-
-            <template v-slot:append>
-              <q-icon
-                :name="isPwd2 ? 'las la-low-vision' : 'las la-eye'"
-                class="cursor-pointer"
-                @click="isPwd2 = !isPwd2"
-              />
-            </template>
-          </q-input>
+          <t-input-password 
+            v-model="form.passwordConfirm" 
+            :rules="[ $twin.rules.sameAs(form.password, 'Confirme novamente a senha') ]" 
+          />
         </q-card-section>
 
         <q-card-actions vertical class="q-pa-md">
@@ -90,11 +51,12 @@
 
 <script>
 import TBackBtn from 'twin-starter/components/TBackBtn.vue'
+import TInputPassword from 'twin-starter/components/TInputPassword.vue'
 
 export default {
   name: 'ResetPasswordPage',
 
-  components: { TBackBtn },
+  components: { TBackBtn, TInputPassword },
 
   data () {
     return {

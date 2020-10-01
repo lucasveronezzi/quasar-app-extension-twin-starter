@@ -41,7 +41,7 @@
 
     {
         "url": "/user",
-        "status": 401,
+        "status": 200,
         "data": {
             "user": {
                 "nome": "Lucas",

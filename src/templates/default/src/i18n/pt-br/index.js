@@ -71,7 +71,7 @@ export default {
 
   label: {
     username: 'Nome',
-    email: 'E-mail'
+    email: 'E-mail',
     password: 'Senha',
     passwordConfirm: 'Confirmar Senha',
     goBack: 'Voltar',
