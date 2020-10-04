@@ -1,6 +1,19 @@
 [
     {
         "url": "/login",
+        "status": 200,
+        "data": {
+           "user": {
+                "nome": "Lucas",
+                "token": "kdskd2442llfs"
+            },
+            "roles": ["user", "table", "create_table"]
+        }
+    },
+
+    {
+        "url": "/login",
+        "activated": true,
         "status": 401,
         "message": "Mock Request Error 400",
         "data": {
@@ -41,7 +54,18 @@
 
     {
         "url": "/user",
+        "activated": true,
         "status": 401,
+        "data": {
+            "error": "no_authorized",
+            "error_description": "User not authenticated",
+            "message": "User not authenticated"
+        }
+    },
+
+    {
+        "url": "/user",
+        "status": 200,
         "data": {
             "user": {
                 "nome": "Lucas",

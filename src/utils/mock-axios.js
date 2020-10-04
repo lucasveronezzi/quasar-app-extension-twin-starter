@@ -67,7 +67,7 @@ export default class {
   }
 
   getDataMock (config) {
-    return this.mocks.find(x => x.url === config.url && (!x.method || x.method.toLowerCase() === config.method))
+    return this.mocks.find(x => x.url === config.url && (!x.activated || x.activated === true) && (!x.method || x.method.toLowerCase() === config.method))
   }
 
   getMockError (config, data) {
