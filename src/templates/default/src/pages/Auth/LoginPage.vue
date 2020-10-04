@@ -18,7 +18,7 @@
           </template>
         </q-input>
 
-        <t-input-password v-model="password" />
+        <input-password v-model="password" />
       </q-card-section>
 
       <q-card-actions vertical class="text-caption text-grey-9 q-pa-md q-mb-lg">
@@ -32,7 +32,7 @@
             tag="a"
             class="text-grey-7 not-hover"
             align="center"
-            >{{ $twin.i18n.t('page.login.passwordForgot') }}
+          >{{ $twin.i18n.t('page.login.passwordForgot') }}
           </router-link>
         </div>
 
@@ -53,12 +53,12 @@
 </template>
 
 <script>
-import TInputPassword from 'twin-starter/components/TInputPassword.vue'
+import InputPassword from 'components/general/InputPassword.vue'
 
 export default {
   name: 'LoginPage',
 
-  components: { TInputPassword },
+  components: { InputPassword },
 
   data () {
     return {

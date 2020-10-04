@@ -37,9 +37,9 @@
           </template>
         </q-input>
 
-        <t-input-password v-model="form.password" />
+        <input-password v-model="form.password" />
 
-        <t-input-password 
+        <input-password 
           v-model="form.passwordConfirm" 
           :rules="[ $twin.rules.sameAs(form.password, 'Confirme novamente a senha') ]" 
         />
@@ -67,12 +67,12 @@
 
 <script>
 import TBackBtn from 'twin-starter/components/TBackBtn.vue'
-import TInputPassword from 'twin-starter/components/TInputPassword.vue'
+import InputPassword from 'components/general/InputPassword.vue'
 
 export default {
   name: 'RegisterPage',
 
-  components: { TBackBtn, TInputPassword },
+  components: { TBackBtn, InputPassword },
 
   data () {
     return {

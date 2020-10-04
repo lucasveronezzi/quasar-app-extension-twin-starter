@@ -3,7 +3,7 @@ import twinStore from 'twin-starter/store'
 export default ({ Vue, store }) => {
   store.registerModule('twin', twinStore)
 
-  // Only use helpers to call actions. 
+  // Only use helpers to call actions.
   // DON'T USE TO GET STATES OR GETTERS BECAUSE OF THE REACTIVITY
   Vue.prototype.$twin = {
     startLoad: () => store.dispatch('twin/startLoadPage'),

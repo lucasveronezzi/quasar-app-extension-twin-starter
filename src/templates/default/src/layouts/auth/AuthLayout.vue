@@ -13,7 +13,7 @@
 </template>
 
 <script>
-<% if (prompts.splashscreen) { %>import Splashscreen from 'components/Splashscreen.vue'<% } %>
+<% if (prompts.splashscreen) { %>import Splashscreen from 'components/general/Splashscreen.vue'<% } %>
 
 export default {
   name: 'AuthLayout',<% if (prompts.splashscreen) { %>  

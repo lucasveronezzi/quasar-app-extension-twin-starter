@@ -57,20 +57,20 @@ function registerBootFiles (conf, api) {
   conf.boot.push('~quasar-app-extension-twin-starter/src/boot/authentication.js')
 }
 
-function registerProcessEnv(conf, api) {
-  conf.build.env[addPrefix('SPLASHSCREEN')] =  api.prompts.splashscreen
-  conf.build.env[addPrefix('AUTH_SCHEME')] =  api.prompts.authScheme
-  conf.build.env[addPrefix('API_LOGIN')] =  api.prompts.apiLogin || '/login'
-  conf.build.env[addPrefix('API_LOGOUT')] =  api.prompts.apiLogout || '/logout'
-  conf.build.env[addPrefix('API_LOAD_USER')] =  api.prompts.apiLoadUser || '/user'
-  conf.build.env[addPrefix('API_REGISTER')] =  api.prompts.apiRegister || '/register'
-  conf.build.env[addPrefix('API_RESET_PASSWORD')] =  api.prompts.apiResetPassword || '/password/reset'
-  conf.build.env[addPrefix('API_FORGOT_PASSWORD')] =  api.prompts.apiForgotPassword || '/password/forgot'
-  conf.build.env[addPrefix('API_EMAIL_VERIFIY_RESEND')] =  api.prompts.apiEmailVerifyResend || '/email/resend'
+function registerProcessEnv (conf, api) {
+  conf.build.env[addPrefix('SPLASHSCREEN')] = api.prompts.splashscreen
+  conf.build.env[addPrefix('AUTH_SCHEME')] = api.prompts.authScheme
+  conf.build.env[addPrefix('API_LOGIN')] = api.prompts.apiLogin || '/login'
+  conf.build.env[addPrefix('API_LOGOUT')] = api.prompts.apiLogout || '/logout'
+  conf.build.env[addPrefix('API_LOAD_USER')] = api.prompts.apiLoadUser || '/user'
+  conf.build.env[addPrefix('API_REGISTER')] = api.prompts.apiRegister || '/register'
+  conf.build.env[addPrefix('API_RESET_PASSWORD')] = api.prompts.apiResetPassword || '/password/reset'
+  conf.build.env[addPrefix('API_FORGOT_PASSWORD')] = api.prompts.apiForgotPassword || '/password/forgot'
+  conf.build.env[addPrefix('API_EMAIL_VERIFIY_RESEND')] = api.prompts.apiEmailVerifyResend || '/email/resend'
 }
 
-function addPrefix(name) {
-  return 'TWIN_' + name;
+function addPrefix (name) {
+  return 'TWIN_' + name
 }
 
 const chainWebpack = (ctx, chain) => {

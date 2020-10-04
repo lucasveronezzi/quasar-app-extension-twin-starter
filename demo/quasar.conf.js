@@ -71,7 +71,7 @@ module.exports = function (/* ctx */) {
           options: {
             fix: true,
             formatter: require('eslint').CLIEngine.getFormatter('stylish')
-          }
+          },
         })
       },
     },

@@ -22,7 +22,7 @@
 import TContainerHeader from 'twin-starter/components/TContainerHeader.vue'
 import AppHeader from './AppHeader.vue'
 import AppLeftMenu from './AppLeftMenu.vue'
-<% if (prompts.splashscreen) { %>import Splashscreen from 'components/Splashscreen.vue'<% } %>
+<% if (prompts.splashscreen) { %>import Splashscreen from 'components/general/Splashscreen.vue'<% } %>
 
 export default {
   name: 'AppLayout',

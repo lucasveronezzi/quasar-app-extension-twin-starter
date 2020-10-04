@@ -131,7 +131,7 @@ module.exports = function () {
       }
     },
 
-     {
+    {
       name: 'mockApi',
       type: 'confirm',
       message: 'Do you want use mock data in the request to API? (default No)',
@@ -182,7 +182,7 @@ module.exports = function () {
       type: 'confirm',
       message: 'Do you want splashscreen before the app is load? (default Yes)',
       default: true
-    },
+    }
 
   ]
 }
