@@ -2,18 +2,21 @@
     {
         "url": "/login",
         "status": 200,
+        "activated": true,
         "data": {
-           "user": {
-                "nome": "Lucas",
-                "token": "kdskd2442llfs"
-            },
-            "roles": ["user", "table", "create_table"]
+            "reponse": {
+                "user": {
+                    "nome": "Lucas",
+                    "token": "kdskd2442llfs",
+                    "roles": ["user", "table", "create_table"]
+                }
+            }
         }
     },
 
     {
         "url": "/login",
-        "activated": true,
+        "activated": false,
         "status": 401,
         "message": "Mock Request Error 400",
         "data": {
@@ -65,6 +68,7 @@
 
     {
         "url": "/user",
+        "activated": false,
         "status": 200,
         "data": {
             "user": {

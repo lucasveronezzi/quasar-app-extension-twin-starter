@@ -39,9 +39,9 @@
 
         <input-password v-model="form.password" />
 
-        <input-password 
-          v-model="form.passwordConfirm" 
-          :rules="[ $twin.rules.sameAs(form.password, 'Confirme novamente a senha') ]" 
+        <input-password
+          v-model="form.passwordConfirm"
+          :rules="[ $twin.rules.sameAs(form.password, 'Confirme novamente a senha') ]"
         />
 
         <q-checkbox

@@ -9,9 +9,8 @@
           outlined
           autocomplete
           bg-color="white"
-          type="email"
           :label="$twin.i18n.t('label.email')"
-          :rules="[ $twin.rules.required() ]"
+          :rules="[ $twin.rules.required(), $twin.rules.email() ]"
         >
           <template v-slot:prepend>
             <q-icon name="las la-envelope" />
@@ -75,6 +74,8 @@ export default {
 
       this.$twin.auth.login({ username: this.login, password: this.password })
         .then(() => {
+          this.loading = false
+
           if (this.$route.query.redirect) {
             this.$router.replace({ path: this.$route.query.redirect })
           } else {

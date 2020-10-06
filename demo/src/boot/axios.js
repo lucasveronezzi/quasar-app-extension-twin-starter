@@ -11,7 +11,8 @@ export default ({ Vue, store, router }) => {
 
     401 () {
       if (router.currentRoute.matched.some(record => record.meta.requiresAuth)) {
-        store.commit('twin/auth/setUser', false)
+        // Logout without send request to API
+        store.dispatch('twin/auth/logout', true)
 
         router.push({
           name: 'login',

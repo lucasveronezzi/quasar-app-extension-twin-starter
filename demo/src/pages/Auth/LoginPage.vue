@@ -9,16 +9,15 @@
           outlined
           autocomplete
           bg-color="white"
-          type="email"
           :label="$twin.i18n.t('label.email')"
-          :rules="[ $twin.rules.required() ]"
+          :rules="[ $twin.rules.required(), $twin.rules.email() ]"
         >
           <template v-slot:prepend>
             <q-icon name="las la-envelope" />
           </template>
         </q-input>
 
-        <t-input-password v-model="password" />
+        <input-password v-model="password" />
       </q-card-section>
 
       <q-card-actions vertical class="text-caption text-grey-9 q-pa-md q-mb-lg">
@@ -32,7 +31,7 @@
             tag="a"
             class="text-grey-7 not-hover"
             align="center"
-            >{{ $twin.i18n.t('page.login.passwordForgot') }}
+          >{{ $twin.i18n.t('page.login.passwordForgot') }}
           </router-link>
         </div>
 
@@ -53,12 +52,12 @@
 </template>
 
 <script>
-import TInputPassword from 'twin-starter/components/TInputPassword.vue'
+import InputPassword from 'components/general/InputPassword.vue'
 
 export default {
   name: 'LoginPage',
 
-  components: { TInputPassword },
+  components: { InputPassword },
 
   data () {
     return {
@@ -75,6 +74,8 @@ export default {
 
       this.$twin.auth.login({ username: this.login, password: this.password })
         .then(() => {
+          this.loading = false
+
           if (this.$route.query.redirect) {
             this.$router.replace({ path: this.$route.query.redirect })
           } else {

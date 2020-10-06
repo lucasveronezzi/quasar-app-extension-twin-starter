@@ -8,6 +8,6 @@
     "authScheme": "nothing",
     "authIndetifierField": "username",
     "routerNested": true,
-    "splashscreen": true
+    "splashscreen": false
   }
 }

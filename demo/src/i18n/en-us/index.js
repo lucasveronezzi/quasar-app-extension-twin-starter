@@ -36,25 +36,51 @@ export default {
     }
   },
 
-  text: {
+  page: {
     login: {
+      passwordForgot: 'Esqueceu a senha?',
+      registerMessage: ' Não possui uma conta?',
+      register: 'Registre-se'
+    },
 
+    passowrdReset: {
+      welcome: 'Bem vindo, ',
+      subTitle: 'Digite sua nova senha e confirme-a.',
+      passwordChangedMessage: 'Senha alterada com sucesso.',
+      redirectMessage: 'Redirecionando para tela de login...'
+    },
+
+    passwordForgot: {
+      title: 'Recuperar Senha',
+      subTitle: 'Digite seu e-mail e clique em enviar para receber no seu e-mail o link recuperação de senha.',
+      emailSent: 'E-mail enviado com sucesso',
+      checkEmailMessage: 'Verifique na sua caixa de entrada o e-mail com o link de recuperação de senha'
     },
 
     register: {
-
+      title: 'Registrar-se',
+      formTitle: 'Dados Cadastrais',
+      agreeWith: 'Eu concordo com os',
+      termsService: 'termos e condições de serviço.'
     },
 
     verification: {
 
-    },
-
-    password: {
-
     }
   },
 
-  field: {
+  label: {
+    username: 'Nome',
+    email: 'E-mail',
+    password: 'Senha',
+    passwordConfirm: 'Confirmar Senha',
+    goBack: 'Voltar'
+  },
 
+  btn: {
+    createAccount: 'Criar Conta',
+    logIn: 'Entrar',
+    resetPassword: 'Confirmar',
+    sendEmail: 'Enviar E-mail'
   }
 }

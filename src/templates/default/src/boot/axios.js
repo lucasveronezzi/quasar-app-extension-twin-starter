@@ -1,6 +1,6 @@
 import twinAxios from 'twin-starter/utils/axios'
 import { Notify } from 'quasar'
-<% if (prompts.mockApi) { %>import '../mock'<% } else {%>/*import '../mockkk'*/<% }%>
+<% if (prompts.mockApi) { %>import '../mock'<% } else {%>// import '../mockkk'<% }%>
 
 const axiosAPI = twinAxios.axiosInstance
 
@@ -11,7 +11,8 @@ export default ({ Vue, store, router }) => {
 
     401 () {
       if (router.currentRoute.matched.some(record => record.meta.requiresAuth)) {
-        store.commit('twin/auth/setUser', false)
+        // Logout without send request to API
+        store.dispatch('twin/auth/logout', true)
 
         router.push({
           name: 'login',

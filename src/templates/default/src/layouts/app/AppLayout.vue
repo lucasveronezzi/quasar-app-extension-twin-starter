@@ -1,6 +1,6 @@
 <template>
   <q-layout view="lHh Lpr lFf" >
-    <% if (prompts.splashscreen) { %><template v-if="authenticated"><% } %>
+<% if (prompts.splashscreen) { %>      <template v-if="authenticated"><% } %>
       <app-header :leftDrawer="leftDrawerOpen" @clickLeftDrawer="leftDrawerOpen = $event"/>
 
       <app-left-menu v-model="leftDrawerOpen"/>
@@ -9,12 +9,10 @@
         <t-container-header v-if="!$q.platform.is.mobile" />
 
         <router-view />
-      </q-page-container>
-    <% if (prompts.splashscreen) { %>
+      </q-page-container><% if (prompts.splashscreen) { %>
     </template>
 
-    <splashscreen v-else />
-    <% } %>
+    <splashscreen-spinner v-else /><% } %>
   </q-layout>
 </template>
 
@@ -22,12 +20,12 @@
 import TContainerHeader from 'twin-starter/components/TContainerHeader.vue'
 import AppHeader from './AppHeader.vue'
 import AppLeftMenu from './AppLeftMenu.vue'
-<% if (prompts.splashscreen) { %>import Splashscreen from 'components/general/Splashscreen.vue'<% } %>
-
+<% if (prompts.splashscreen) { %>import SplashscreenSpinner from 'components/general/SplashscreenSpinner.vue'
+<% } %>
 export default {
   name: 'AppLayout',
 
-  components: { TContainerHeader, AppHeader, AppLeftMenu, <% if (prompts.splashscreen) { %>Splashscreen <% } %>},
+  components: { TContainerHeader, AppHeader, AppLeftMenu<% if (prompts.splashscreen) { %>, SplashscreenSpinner<% } %> },
 
   data () {
     return {
@@ -37,7 +35,7 @@ export default {
 
   computed: {
     authenticated () {
-      return this.$store.getters['twin/auth/authenticated']
+      return this.$store.getters['twin/auth/isAuthenticated']
     }
   },
 <% } %>

@@ -66,7 +66,7 @@ export default {
 
     verification: {
 
-    },
+    }
   },
 
   label: {
@@ -74,7 +74,7 @@ export default {
     email: 'E-mail',
     password: 'Senha',
     passwordConfirm: 'Confirmar Senha',
-    goBack: 'Voltar',
+    goBack: 'Voltar'
   },
 
   btn: {

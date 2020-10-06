@@ -1,5 +1,6 @@
 import { axiosAPI } from 'boot/axios'
 import { Cookies } from 'quasar'
+import { runLoginCallBack, runLoadUserCallback } from 'twin-starter/utils/auth'
 
 function resolveDataUser (commit, user) {
   if (user?.roles) {
@@ -20,12 +21,10 @@ export function login ({ state, commit }, data) {
     client_secret: process.env.API_CLIENT_SECRET,
     scope: '*'
   }, data), { ignoreCode: [400, 401] })
-    .then(response => {
+    .then(async response => {
       resolveDataUser(commit, response.data)
 
-      state.loginCallback.forEach(callback => {
-        callback(response.data)
-      })
+      await runLoginCallBack(response.data)
 
       return response
     })
@@ -60,9 +59,7 @@ export function loadUser ({ state, commit }) {
     .then(response => {
       resolveDataUser(commit, response.data)
 
-      state.loadUserCallback.forEach(callback => {
-        callback(response.data)
-      })
+      runLoadUserCallback(response.data)
 
       return response
     })

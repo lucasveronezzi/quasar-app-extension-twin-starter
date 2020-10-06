@@ -6,24 +6,24 @@
             <router-view />
           </div>
         </q-page>
-      </q-page-container>
-      
-      <% if (prompts.splashscreen) { %><splashscreen v-else /><% } %>
+      </q-page-container><% if (prompts.splashscreen) { %>
+
+      <splashscreen-spinner v-else /><% } %>
   </q-layout>
 </template>
 
 <script>
-<% if (prompts.splashscreen) { %>import Splashscreen from 'components/general/Splashscreen.vue'<% } %>
-
+<% if (prompts.splashscreen) { %>import SplashscreenSpinner from 'components/general/SplashscreenSpinner.vue'
+<% } %>
 export default {
-  name: 'AuthLayout',<% if (prompts.splashscreen) { %>  
+  name: 'AuthLayout'<% if (prompts.splashscreen) { %>,
 
-  components: { Splashscreen },
+  components: { SplashscreenSpinner },
 
   computed: {
     authenticated () {
-      return this.$store.getters['twin/auth/authenticated']
+      return this.$store.getters['twin/auth/isAuthenticated']
     }
-  },<% } %>
+  }<% } %>
 }
 </script>

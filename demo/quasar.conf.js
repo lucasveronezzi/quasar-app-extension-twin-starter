@@ -19,6 +19,7 @@ module.exports = function (/* ctx */) {
     // --> boot files are part of "main.js"
     // https://quasar.dev/quasar-cli/boot-files
     boot: [
+      'twin',
       'axios'
     ],
 
@@ -68,10 +69,6 @@ module.exports = function (/* ctx */) {
           test: /\.(js|vue)$/,
           loader: 'eslint-loader',
           exclude: /node_modules/,
-          options: {
-            fix: true,
-            formatter: require('eslint').CLIEngine.getFormatter('stylish')
-          },
         })
       },
     },

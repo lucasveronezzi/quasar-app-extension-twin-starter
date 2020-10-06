@@ -1,6 +1,10 @@
-export function authenticated (state) {
+export function isAuthenticated (state) {
   if (state.user) return true
 
+  return state.user
+}
+
+export function getUser (state) {
   return state.user
 }
 

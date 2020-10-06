@@ -9,7 +9,7 @@ function checkPermission (route, store, router) {
   return route.matched.every(record => {
     const auth = record.meta.auth
     if (auth) {
-      if (store.getters['twin/auth/authenticated'] === false) {
+      if (store.getters['twin/auth/isAuthenticated'] === false) {
         router.push({
           name: 'login',
           query: { redirect: route.fullPath },
@@ -25,7 +25,7 @@ function checkPermission (route, store, router) {
         return false
       }
     } else if (auth === false) {
-      if (store.getters['twin/auth/authenticated']) {
+      if (store.getters['twin/auth/isAuthenticated']) {
         router.push({
           name: 'home',
           replace: true

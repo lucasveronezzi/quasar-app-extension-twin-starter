@@ -19,6 +19,12 @@ Quasar CLI will retrieve it from the NPM registry and install the extension to y
 
 > Explain the prompts here
 
+## Eslint
+options: {
+  fix: true,
+  formatter: require('eslint').CLIEngine.getFormatter('stylish')
+},
+
 # Uninstall
 ```bash
 quasar ext remove twin-starter
