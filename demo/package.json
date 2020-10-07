@@ -10,11 +10,11 @@
     "test": "echo \"No test specified\" && exit 0"
   },
   "dependencies": {
+    "@lucasveronezzi/quasar-app-extension-twin-starter": "file:..",
     "@quasar/extras": "^1.0.0",
     "axios": "^0.18.1",
     "core-js": "^3.6.5",
     "quasar": "^1.0.0",
-    "quasar-app-extension-twin-starter": "file:..",
     "vue-i18n": "^8.0.0"
   },
   "devDependencies": {

@@ -38,26 +38,30 @@ function extendConf (conf, api) {
 }
 
 function registerBootFiles (conf, api) {
-  conf.boot.push('~quasar-app-extension-twin-starter/src/boot/index.js')
+  conf.boot.push('~@lucasveronezzi/quasar-app-extension-twin-starter/src/boot/index.js')
 
   if (fs.existsSync(api.resolve.app('src/boot/i18n.js'))) {
-    conf.boot.push('~quasar-app-extension-twin-starter/src/boot/vue-i18n.js')
+    conf.boot.push('~@lucasveronezzi/quasar-app-extension-twin-starter/src/boot/vue-i18n.js')
   } else {
-    conf.boot.push('~quasar-app-extension-twin-starter/src/boot/twin-i18n.js')
+    conf.boot.push('~@lucasveronezzi/quasar-app-extension-twin-starter/src/boot/twin-i18n.js')
   }
 
   if (api.prompts.routerNested) {
-    conf.boot.push('~quasar-app-extension-twin-starter/src/boot/router-nested.js')
+    conf.boot.push('~@lucasveronezzi/quasar-app-extension-twin-starter/src/boot/router-nested.js')
   }
 
-  conf.boot.push('~quasar-app-extension-twin-starter/src/boot/register-base-component.js')
+  conf.boot.push('~@lucasveronezzi/quasar-app-extension-twin-starter/src/boot/register-base-component.js')
 
-  conf.boot.push('~quasar-app-extension-twin-starter/src/boot/validation-rules.js')
+  conf.boot.push('~@lucasveronezzi/quasar-app-extension-twin-starter/src/boot/validation-rules.js')
 
-  conf.boot.push('~quasar-app-extension-twin-starter/src/boot/authentication.js')
+  conf.boot.push('~@lucasveronezzi/quasar-app-extension-twin-starter/src/boot/authentication.js')
 }
 
 function registerProcessEnv (conf, api) {
+  let dotEnv = require('@lucasveronezzi/load-dotenv')
+
+  conf.build.env = { ...dotEnv }
+
   conf.build.env[addPrefix('SPLASHSCREEN')] = api.prompts.splashscreen
   conf.build.env[addPrefix('AUTH_SCHEME')] = api.prompts.authScheme
   conf.build.env[addPrefix('API_LOGIN')] = api.prompts.apiLogin || '/login'
