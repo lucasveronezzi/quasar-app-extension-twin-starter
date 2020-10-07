@@ -1,17 +1,14 @@
 <template>
-  <app-page>
-    <app-card>
-    </app-card>
-  </app-page>
-
+  <q-page class="flex flex-center">
+    <img
+      alt="Quasar logo"
+      src="~assets/quasar-logo-full.svg"
+    >
+  </q-page>
 </template>
 
 <script>
 export default {
-  methods: {
-    login () {
-      this.$twin.whitLoading('twin/auth/login', {})
-    }
-  }
+  name: 'PageIndex'
 }
 </script>

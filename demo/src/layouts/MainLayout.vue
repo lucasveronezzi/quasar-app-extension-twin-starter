@@ -1,5 +1,5 @@
 <template>
-  <q-layout view="lHh Lpr lFf" v-if="$store.getters['auth/authenticated']">
+  <q-layout view="lHh Lpr lFf">
     <q-header elevated>
       <q-toolbar>
         <q-btn
@@ -92,7 +92,7 @@ const linksData = [
     icon: 'favorite',
     link: 'https://awesome.quasar.dev'
   }
-]
+];
 
 export default {
   name: 'MainLayout',

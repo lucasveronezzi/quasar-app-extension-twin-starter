@@ -1,6 +1,6 @@
 <template>
   <q-layout view="lHh Lpr lFf" >
-
+      <template v-if="authenticated">
       <app-header :leftDrawer="leftDrawerOpen" @clickLeftDrawer="leftDrawerOpen = $event"/>
 
       <app-left-menu v-model="leftDrawerOpen"/>
@@ -10,6 +10,9 @@
 
         <router-view />
       </q-page-container>
+    </template>
+
+    <splashscreen-spinner v-else />
   </q-layout>
 </template>
 
@@ -17,17 +20,25 @@
 import TContainerHeader from 'twin-starter/components/TContainerHeader.vue'
 import AppHeader from './AppHeader.vue'
 import AppLeftMenu from './AppLeftMenu.vue'
+import SplashscreenSpinner from 'components/general/SplashscreenSpinner.vue'
 
 export default {
   name: 'AppLayout',
 
-  components: { TContainerHeader, AppHeader, AppLeftMenu },
+  components: { TContainerHeader, AppHeader, AppLeftMenu, SplashscreenSpinner },
 
   data () {
     return {
       leftDrawerOpen: false
     }
   },
+
+  computed: {
+    authenticated () {
+      return this.$store.getters['twin/auth/isAuthenticated']
+    }
+  },
+
   beforeRouteUpdate (to, from, next) {
     if (this.$q.platform.is.mobile) { this.leftDrawerOpen = false }
 

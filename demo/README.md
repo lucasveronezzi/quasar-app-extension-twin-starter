@@ -1,4 +1,4 @@
-# Quasar Twin Started Kit (demo)
+# Quasar App (demo)
 
 A Quasar Framework app
 

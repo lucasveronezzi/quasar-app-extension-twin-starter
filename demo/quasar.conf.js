@@ -19,8 +19,9 @@ module.exports = function (/* ctx */) {
     // --> boot files are part of "main.js"
     // https://quasar.dev/quasar-cli/boot-files
     boot: [
-      'twin',
-      'axios'
+      
+      'i18n',
+      'axios',
     ],
 
     // https://quasar.dev/quasar-cli/quasar-conf-js#Property%3A-css
@@ -35,16 +36,16 @@ module.exports = function (/* ctx */) {
       // 'fontawesome-v5',
       // 'eva-icons',
       // 'themify',
-      'line-awesome',
+      // 'line-awesome',
       // 'roboto-font-latin-ext', // this or either 'roboto-font', NEVER both!
 
       'roboto-font', // optional, you are not bound to it
-      'material-icons' // optional, you are not bound to it
+      'material-icons', // optional, you are not bound to it
     ],
 
     // Full list of options: https://quasar.dev/quasar-cli/quasar-conf-js#Property%3A-build
     build: {
-      vueRouterMode: 'history', // available values: 'hash', 'history'
+      vueRouterMode: 'hash', // available values: 'hash', 'history'
 
       // transpile: false,
 
@@ -64,11 +65,11 @@ module.exports = function (/* ctx */) {
 
       // https://quasar.dev/quasar-cli/handling-webpack
       extendWebpack (cfg) {
-        cfg.module.rules.push({
+cfg.module.rules.push({
           enforce: 'pre',
           test: /\.(js|vue)$/,
           loader: 'eslint-loader',
-          exclude: /node_modules/,
+          exclude: /node_modules/
         })
       },
     },
@@ -83,7 +84,7 @@ module.exports = function (/* ctx */) {
     // https://quasar.dev/quasar-cli/quasar-conf-js#Property%3A-framework
     framework: {
       iconSet: 'material-icons', // Quasar icon set
-      lang: 'pt-br', // Quasar language pack
+      lang: 'en-us', // Quasar language pack
       config: {},
 
       // Possible values for "importStrategy":
@@ -116,9 +117,9 @@ module.exports = function (/* ctx */) {
       workboxPluginMode: 'GenerateSW', // 'GenerateSW' or 'InjectManifest'
       workboxOptions: {}, // only for GenerateSW
       manifest: {
-        name: 'Quasar Twin Started Kit',
-        short_name: 'Quasar Twin Started Kit',
-        description: 'A Quasar Framework app',
+        name: `Quasar App`,
+        short_name: `Quasar App`,
+        description: `A Quasar Framework app`,
         display: 'standalone',
         orientation: 'portrait',
         background_color: '#ffffff',
