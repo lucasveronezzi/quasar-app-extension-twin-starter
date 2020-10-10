@@ -1,6 +1,6 @@
 {
   "name": "@lucasveronezzi/quasar-app-extension-twin-starter",
-  "version": "0.0.1",
+  "version": "0.0.0",
   "description": "A starter kit that allows you to start a new project using the Quasar Framework with some extras features like authentication, ACL, authencation pages etc...",
   "author": "Lucas Veronezzi <lucasveronezzi.ti@gmail.com>",
   "license": "MIT",
