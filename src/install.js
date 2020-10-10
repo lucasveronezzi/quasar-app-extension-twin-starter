@@ -10,13 +10,15 @@ const { log } = require('./utils/logger')
 
 const helper = require('./utils/files')
 
+const routeApi = require('./utils/api.default.json')
+
 module.exports = async function (api) {
   api.compatibleWith('quasar', '^1.8.5')
 
   api.compatibleWith('@quasar/app', '^1.0.0  || >= 2')
 
   api.render('./templates/default', {
-    prompts: api.prompts
+    prompts: { ...routeApi, ...api.prompts }
   })
 
   var file = null

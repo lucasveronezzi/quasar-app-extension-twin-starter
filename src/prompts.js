@@ -139,27 +139,82 @@ module.exports = function () {
     },
 
     {
-      name: 'authScheme',
+      name: 'schemeSendToken',
       type: 'list',
-      message: 'Wich scheme of authentication do you want to use?',
+      message: 'How do you want to do the api authorization?',
       choices: [
         {
-          name: "Don't do anything, the API server will save the token in the cookie and use automatically (recommended)",
+          name: "Don't do anything, the API server will set the cookie with the token and use automatically (recommended)",
           value: 'nothing',
           short: "Don't do anything"
         },
         {
-          name: 'Bearer, save and get the token from cookie',
-          value: 'Bearer',
-          short: 'Bearer'
+          name: "Set token in the cookie using httponly and secure",
+          value: 'cookie',
+          short: "Set token in the cookie"
         },
         {
-          name: 'Basic, save and get the token from cookie',
-          value: 'Basic',
-          short: 'Basic'
-        }
+          name: 'Set Authorization in the header of the requests',
+          value: 'header',
+          short: 'Set Header Authorization'
+        },
       ],
       default: 'nothing'
+    },
+
+    {
+      name: 'authScheme',
+      type: 'list',
+      message: 'Wich scheme of authorization do you want to use?',
+      choices: [
+        {
+          name: "Bearer",
+          value: 'Bearer',
+          short: "Bearer"
+        },
+        {
+          name: 'Basic',
+          value: 'Basic',
+          short: 'Basic'
+        },
+      ],
+      when: (answers) => {
+        return answers.schemeSendToken === 'header'
+      },
+      default: 'bearer'
+    },
+
+    {
+      name: 'storageToken',
+      type: 'list',
+      message: 'Where do you want to storage the token?',
+      choices: [
+        {
+          name: "Cookie",
+          value: 'cookie',
+          short: "Cookie"
+        },
+        {
+          name: 'Local Storage',
+          value: 'localStorage',
+          short: 'Local Storage'
+        },
+      ],
+      when: (answers) => {
+        return answers.schemeSendToken === 'header'
+      },
+      default: 'cookie'
+    },
+
+    {
+      name: 'cookieName',
+      type: 'input',
+      required: true,
+      message: 'Name of the cookie to be sent to API in the request',
+       when: (answers) => {
+        return answers.schemeSendToken === 'cookie'
+      },
+      default: 'laravel_token'
     },
 
     {

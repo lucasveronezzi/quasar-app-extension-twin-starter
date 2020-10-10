@@ -1,6 +1,6 @@
 export default function () {
   return {
-    roles: [],
+    permissions: [],
     user: null
   }
 }

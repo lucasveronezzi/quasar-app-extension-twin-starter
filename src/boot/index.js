@@ -33,7 +33,7 @@ export default ({ Vue, store }) => {
 
       checkAcl: (roles) => store.getters['twin/auth/checkAcl'](roles),
 
-      setHeader: (data) => store.dispatch('twin/auth/setHeader', data),
+      setToken: (data) => store.dispatch('twin/auth/setToken', data),
 
       fetch: () => store.dispatch('twin/auth/fetch')
     }

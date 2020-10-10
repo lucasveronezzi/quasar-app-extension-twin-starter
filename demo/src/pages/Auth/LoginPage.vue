@@ -72,8 +72,9 @@ export default {
     submit () {
       this.loading = true
 
-      this.$twin.auth.login({ username: this.login, password: this.password })
-        .then(() => {
+      this.$twin.auth.login({ username: this.login, password: this.password, cookie_login: true })
+        .then(async response => {
+          
           this.loading = false
 
           if (this.$route.query.redirect) {

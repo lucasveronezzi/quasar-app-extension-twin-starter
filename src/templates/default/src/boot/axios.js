@@ -1,6 +1,6 @@
 import twinAxios from 'twin-starter/utils/axios'
 import { Notify } from 'quasar'
-<% if (prompts.mockApi) { %>import '../mock'<% } else {%>// import '../mockkk'<% }%>
+<% if (prompts.mockApi) { %>import '../mock'<% } else {%>// import '../mock'<% }%>
 
 const axiosAPI = twinAxios.axiosInstance
 

@@ -72,8 +72,14 @@ export default {
     submit () {
       this.loading = true
 
-      this.$twin.auth.login({ username: this.login, password: this.password })
-        .then(() => {
+      this.$twin.auth.login({ <%=prompts.authIndetifierField%>: this.login, password: this.password })
+        .then(async response => {
+          <% if (prompts.schemeSendToken !== 'nothing') { %>
+          await this.$twin.auth.setToken({
+            access_token: response.data.token,
+            expires_in: response.data.expires_in
+          })
+          <% } %>
           this.loading = false
 
           if (this.$route.query.redirect) {

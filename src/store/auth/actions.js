@@ -1,17 +1,37 @@
 import { axiosAPI } from 'boot/axios'
-import { Cookies } from 'quasar'
 import { runLoginCallBack, runLoadUserCallback } from 'twin-starter/utils/auth'
+import { Cookies, LocalStorage } from 'quasar'
 
-function resolveDataUser (commit, user) {
-  if (user?.roles) {
-    commit('setRoles', user.roles)
-    delete user.roles
-  } else if (user?.user?.roles) {
-    commit('setRoles', user.user.roles)
-    delete user.user.roles
+function removeToken () {
+  if (process.env.TWIN_AUTH_SCHEME_SEND_TOKEN === 'header') {
+    if (process.env.TWIN_AUTH_STORAGE_TOKEN === 'cookie') {
+      Cookies.remove('api_access_token')
+    }
+
+    if (process.env.TWIN_AUTH_STORAGE_TOKEN === 'localStorage') {
+      LocalStorage.remove('api_access_token')
+    }
+  }
+}
+
+function resolveDataUser (commit, data) {
+  if (!data) data = {}
+
+  if (data.data) data = data.data
+
+  if (data.permissions) {
+    commit('setPermissions', data.permissions)
+    delete data.permissions
+  } else if (data.user?.permissions) {
+    commit('setPermissions', data.user.permissions)
+    delete data.user.permissions
   }
 
-  commit('setUser', user || {})
+  if (data.user) {
+    commit('setUser', data.user)
+  } else {
+    commit('setUser', data)
+  }
 }
 
 export function login ({ state, commit }, data) {
@@ -30,25 +50,48 @@ export function login ({ state, commit }, data) {
     })
 }
 
-export function setHeader ({ commit }, data) {
-  if (process.env.TWIN_AUTH_SCHEME === 'Basic') {
-    data.token = btoa(`${data.username}:${data.password}`)
+export function setToken ({ commit }, data) {
+  if (process.env.TWIN_AUTH_SCHEME_SEND_TOKEN === 'cookie') {
+    Cookies.set(process.env.TWIN_AUTH_COOKIE_NAME, data.access_token, {
+      expires: data.expires_in || 3650,
+      path: '/',
+      secure: true,
+      httpOnly: true,
+      sameSite: 'Strict'
+    })
+    console.log(Cookies.get(process.env.TWIN_AUTH_COOKIE_NAME))
   }
 
-  axiosAPI.defaults.headers.Authorization = `${process.env.TWIN_AUTH_SCHEME} ${data.token}`
+  if (process.env.TWIN_AUTH_SCHEME_SEND_TOKEN === 'header') {
+    if (process.env.TWIN_AUTH_SCHEME === 'Basic') {
+      data.access_token = btoa(`${data.username}:${data.password}`)
+    }
 
-  if (data.expires_in) {
-    Cookies.set('api_token', data.token, {
-      expires: data.expires_in
-    })
-  } else {
-    Cookies.set('api_token', data.token)
+    axiosAPI.defaults.headers.Authorization = `${process.env.TWIN_AUTH_SCHEME} ${data.access_token}`
+
+    if (process.env.TWIN_AUTH_STORAGE_TOKEN === 'cookie') {
+      Cookies.set('api_access_token', data.access_token, {
+        expires: data.expires_in || 3650,
+        sameSite: 'Strict'
+      })
+    }
+
+    if (process.env.TWIN_AUTH_STORAGE_TOKEN === 'localStorage') {
+      LocalStorage.set('api_access_token', data.access_token)
+    }
   }
 }
 
 export function loadUser ({ state, commit }) {
-  if (process.env.TWIN_AUTH_SCHEME !== 'nothing') {
-    var token = Cookies.get('api_token')
+  if (process.env.TWIN_AUTH_SCHEME_SEND_TOKEN === 'header') {
+    var token
+    if (process.env.TWIN_AUTH_STORAGE_TOKEN === 'cookie') {
+      token = Cookies.get('api_access_token')
+    }
+
+    if (process.env.TWIN_AUTH_STORAGE_TOKEN === 'localStorage') {
+      token = LocalStorage.getItem('api_access_token')
+    }
 
     if (token) {
       axiosAPI.defaults.headers.Authorization = `${process.env.TWIN_AUTH_SCHEME} ${token}`
@@ -88,14 +131,14 @@ export function verify ({ state, commit }) {
 
 export function logout ({ commit }, wihtouApi = false) {
   if (wihtouApi) {
-    Cookies.remove('api_token')
+    removeToken()
     commit('setUser', false)
     return true
   }
 
   return axiosAPI.post(process.env.TWIN_API_LOGOUT)
     .then(() => {
-      Cookies.remove('api_token')
+      removeToken()
       commit('setUser', false)
     })
 }

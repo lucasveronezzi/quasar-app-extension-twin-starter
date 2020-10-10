@@ -1,0 +1,9 @@
+{
+    "apiLogin": "/auth/login",
+    "apiLogout": "/auth/logout",
+    "apiLoadUser": "/auth/user",
+    "apiRegister": "/register",
+    "apiResetPassword": "/password/reset",
+    "apiForgotPassword": "/password/forgot",
+    "apiEmailVerifyResend": "/email/resend"
+}

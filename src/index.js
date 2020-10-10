@@ -11,6 +11,8 @@ const path = require('path')
 
 const { log, fatal } = require('./utils/logger')
 
+const routeApi = require('./utils/api.default.json')
+
 const plugins = ['Notify', 'Cookies']
 
 function extendConf (conf, api) {
@@ -58,19 +60,24 @@ function registerBootFiles (conf, api) {
 }
 
 function registerProcessEnv (conf, api) {
+  let prompts = { ...routeApi, ...api.prompts }
+
   let dotEnv = require('@lucasveronezzi/load-dotenv')
 
   conf.build.env = { ...dotEnv }
 
-  conf.build.env[addPrefix('SPLASHSCREEN')] = api.prompts.splashscreen
-  conf.build.env[addPrefix('AUTH_SCHEME')] = api.prompts.authScheme
-  conf.build.env[addPrefix('API_LOGIN')] = api.prompts.apiLogin || '/login'
-  conf.build.env[addPrefix('API_LOGOUT')] = api.prompts.apiLogout || '/logout'
-  conf.build.env[addPrefix('API_LOAD_USER')] = api.prompts.apiLoadUser || '/user'
-  conf.build.env[addPrefix('API_REGISTER')] = api.prompts.apiRegister || '/register'
-  conf.build.env[addPrefix('API_RESET_PASSWORD')] = api.prompts.apiResetPassword || '/password/reset'
-  conf.build.env[addPrefix('API_FORGOT_PASSWORD')] = api.prompts.apiForgotPassword || '/password/forgot'
-  conf.build.env[addPrefix('API_EMAIL_VERIFIY_RESEND')] = api.prompts.apiEmailVerifyResend || '/email/resend'
+  conf.build.env[addPrefix('SPLASHSCREEN')] = prompts.splashscreen
+  conf.build.env[addPrefix('AUTH_SCHEME_SEND_TOKEN')] = prompts.schemeSendToken
+  conf.build.env[addPrefix('AUTH_SCHEME')] = prompts.authScheme
+  conf.build.env[addPrefix('AUTH_STORAGE_TOKEN')] = prompts.storageToken
+  conf.build.env[addPrefix('AUTH_COOKIE_NAME')] = prompts.cookieName
+  conf.build.env[addPrefix('API_LOGIN')] = prompts.apiLogin
+  conf.build.env[addPrefix('API_LOGOUT')] = prompts.apiLogout
+  conf.build.env[addPrefix('API_LOAD_USER')] = prompts.apiLoadUser
+  conf.build.env[addPrefix('API_REGISTER')] = prompts.apiRegister
+  conf.build.env[addPrefix('API_RESET_PASSWORD')] = prompts.apiResetPassword
+  conf.build.env[addPrefix('API_FORGOT_PASSWORD')] = prompts.apiForgotPassword
+  conf.build.env[addPrefix('API_EMAIL_VERIFIY_RESEND')] = prompts.apiEmailVerifyResend
 }
 
 function addPrefix (name) {
