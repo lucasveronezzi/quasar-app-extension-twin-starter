@@ -2,7 +2,7 @@
   "name": "@lucasveronezzi/quasar-app-extension-twin-starter",
   "version": "0.0.1",
   "description": "A starter kit that allows you to start a new project using the Quasar Framework with some extras features like authentication, ACL, authencation pages etc...",
-  "author": "Lucas Veronezzi <lucasveronezzi_eltic@hotmail.com>",
+  "author": "Lucas Veronezzi <lucasveronezzi.ti@gmail.com>",
   "license": "MIT",
   "main": "src/index.js",
   "scripts": {
@@ -28,7 +28,7 @@
     "yarn": ">= 1.6.0"
   },
   "dependencies": {
-    "@lucasveronezzi/load-dotenv": "git+https://github.com/lucasveronezzi/load-dotenv.git",
+    "@lucasveronezzi/load-dotenv": "0.0.2",
     "axios": "^0.20.0",
     "chalk": "^4.1.0",
     "fs": "0.0.1-security",
