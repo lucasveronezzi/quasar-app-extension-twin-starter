@@ -1,6 +1,6 @@
 [
     {
-        "url": "auth/login",
+        "url": "/auth/login",
         "status": 200,
         "activated": true,
         "data": {
@@ -10,7 +10,7 @@
     },
 
     {
-        "url": "auth/login",
+        "url": "/auth/login",
         "activated": false,
         "status": 401,
         "message": "Mock Request Error 400",
@@ -23,6 +23,14 @@
     },
 
     {
+        "url": "/auth/logout",
+        "status": 200,
+        "data": {
+            "message": "Logout sucess"
+        }
+    },
+
+    {
         "url": "/register",
         "status": 200,
         "data": {
@@ -30,21 +38,21 @@
     },
 
     {
-        "url": "/auth/password/reset",
+        "url": "/password/reset",
         "status": 200,
         "data": {
         }
     },
 
     {
-        "url": "/auth/password/forgot",
+        "url": "/password/forgot",
         "status": 200,
         "data": {
         }
     },
 
     {
-        "url": "/auth/email/resend",
+        "url": "/email/resend",
         "status": 200,
         "data": {
         }

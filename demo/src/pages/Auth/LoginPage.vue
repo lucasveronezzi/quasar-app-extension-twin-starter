@@ -72,7 +72,7 @@ export default {
     submit () {
       this.loading = true
 
-      this.$twin.auth.login({ username: this.login, password: this.password, cookie_login: true })
+      this.$twin.auth.login({ username: this.login, password: this.password })
         .then(async response => {
           
           this.loading = false

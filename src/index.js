@@ -13,7 +13,7 @@ const { log, fatal } = require('./utils/logger')
 
 const routeApi = require('./utils/api.default.json')
 
-const plugins = ['Notify', 'Cookies']
+const plugins = ['Notify', 'Cookies', 'Loading']
 
 function extendConf (conf, api) {
   if (!fs.existsSync(api.resolve.app('src/components/base'))) {

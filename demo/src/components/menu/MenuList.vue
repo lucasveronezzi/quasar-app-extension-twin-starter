@@ -3,7 +3,7 @@
     <q-list padding>
       <template v-for="(item, index) in menuItems">
         <q-item
-          v-if="!item.child"
+          v-if="!item.child && item.type !== 'separator'"
           :key="index"
           :to="item.link"
           @click="item.action ? action(item.action) : null"
@@ -21,7 +21,7 @@
         </q-item>
 
         <q-expansion-item
-          v-if="item.child"
+          v-if="item.child && item.type !== 'separator'"
           :key="index"
           v-model="menuItemsOpen[index]"
           :label="item.name"
@@ -33,22 +33,28 @@
           expanded-icon="keyboard_arrow_down"
           expand-separator
         >
-          <q-item
-            v-for="(child, childIndex) in item.child"
-            :key="childIndex"
-            v-ripple
-            :inset-level="0.8"
-            :to="child.link"
-            @click="child.action ? action(item.action) : null"
-            active-class="text-white"
-            clickable
-            exact
-          >
-            <q-item-section>
-              {{ child.name }}
-            </q-item-section>
-          </q-item>
+          <template v-for="(child, childIndex) in item.child">
+            <q-item
+              v-if="child.type !== 'separator'"
+              :key="childIndex"
+              v-ripple
+              :inset-level="0.8"
+              :to="child.link"
+              @click="child.action ? action(item.action) : null"
+              active-class="text-white"
+              clickable
+              exact
+            >
+              <q-item-section>
+                {{ child.name }}
+              </q-item-section>
+            </q-item>
+
+            <q-separator spaced :key="childIndex" v-else />
+          </template>
         </q-expansion-item>
+
+        <q-separator spaced :key="index" v-if="item.type === 'separator'" />
       </template>
     </q-list>
 
@@ -77,15 +83,14 @@ export default {
 
   methods: {
     logout () {
-      console.log('logout')
-      // this.$q.loading.show({
-      //   message: 'Saindo do sistema...'
-      // })
+      this.$q.loading.show({
+        message: 'Saindo do sistema...'
+      })
 
-      // this.$store.dispatch('account/logout').finally(() => {
-      //   this.$q.loading.hide()
-      //   this.$router.push('/login')
-      // })
+      this.$twin.auth.logout().finally(() => {
+        this.$q.loading.hide()
+        this.$router.push({ name: 'login' })
+      })
     }
   }
 }

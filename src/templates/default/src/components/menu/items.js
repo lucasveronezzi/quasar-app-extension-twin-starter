@@ -18,6 +18,9 @@ const menuItems = [
         link: '/item-2/sub-item-1'
       },
       {
+        type: 'separator'
+      },
+      {
         name: 'Sub Item 2',
         link: '/item-2/sub-item-2'
       }
@@ -27,6 +30,9 @@ const menuItems = [
     name: 'Item 3',
     link: '/item-3',
     icon: 'las la-calendar'
+  },
+  {
+    type: 'separator'
   },
   {
     name: 'Sair do Sistema',
