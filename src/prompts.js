@@ -8,6 +8,7 @@
  * https://www.npmjs.com/package/inquirer#question
  *
 */
+const routeApi = require('./utils/api.default.json')
 
 module.exports = function () {
   return [
@@ -59,7 +60,7 @@ module.exports = function () {
       type: 'input',
       required: true,
       message: 'Route for user login',
-      default: '/login',
+      default: routeApi.apiLogin,
       when: (answers) => {
         return answers.changeRoutesApi === 'yes'
       }
@@ -70,7 +71,7 @@ module.exports = function () {
       type: 'input',
       required: true,
       message: 'Route for user logout',
-      default: '/logout',
+      default: routeApi.apiLogout,
       when: (answers) => {
         return answers.changeRoutesApi === 'yes'
       }
@@ -81,7 +82,7 @@ module.exports = function () {
       type: 'input',
       required: true,
       message: 'Route to load authenticated user info',
-      default: '/user',
+      default: routeApi.apiLoadUser,
       when: (answers) => {
         return answers.changeRoutesApi === 'yes'
       }
@@ -92,7 +93,7 @@ module.exports = function () {
       type: 'input',
       required: true,
       message: 'Route for user register',
-      default: '/register',
+      default: routeApi.apiRegister,
       when: (answers) => {
         return answers.changeRoutesApi === 'yes'
       }
@@ -103,7 +104,7 @@ module.exports = function () {
       type: 'input',
       required: true,
       message: 'Route to reset password',
-      default: '/auth/password/reset',
+      default: routeApi.apiResetPassword,
       when: (answers) => {
         return answers.changeRoutesApi === 'yes'
       }
@@ -114,7 +115,7 @@ module.exports = function () {
       type: 'input',
       required: true,
       message: 'Route for user forgotten password request',
-      default: '/auth/password/forgot',
+      default: routeApi.apiForgotPassword,
       when: (answers) => {
         return answers.changeRoutesApi === 'yes'
       }
@@ -125,7 +126,7 @@ module.exports = function () {
       type: 'input',
       required: true,
       message: 'Route for user resend verification email',
-      default: '/auth/email/resend',
+      default: routeApi.apiEmailVerifyResend,
       when: (answers) => {
         return answers.changeRoutesApi === 'yes'
       }
