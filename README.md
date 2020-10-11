@@ -5,7 +5,7 @@ This README is being prepared...
 
 # Install
 ```bash
-quasar ext add twin-starter
+quasar ext add @lucasveronezzi/twin-starter
 ```
 Quasar CLI will retrieve it from the NPM registry and install the extension to your project.
 
