@@ -1,10 +1,10 @@
-const routerNested = {
-  history: []
-}
-
 var routeHome = null
 
 export default ({ router, Vue }) => {
+  const routerNested = Vue.observable({
+    history: []
+  })
+
   Vue.prototype.$twin.routerNested = routerNested
 
   router.afterEach((to, from) => {
