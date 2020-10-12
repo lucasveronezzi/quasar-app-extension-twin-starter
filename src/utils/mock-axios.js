@@ -28,8 +28,8 @@ export default class {
   constructor (axiosInstance, delay = 0) {
     this.axiosInstance = axiosInstance
 
-    this.mocks = {}
-
+    this.mocks = []
+    
     this.mockingEnabled = true
 
     this.delay = delay
@@ -56,9 +56,9 @@ export default class {
 
   addMock (data) {
     if (Array.isArray(data)) {
-      this.mocks = data
+      data.forEach(x => this.mocks.push(x))
     } else {
-      this.mocks = [data]
+      this.mocks.push(data)
     }
   }
 
