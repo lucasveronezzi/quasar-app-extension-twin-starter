@@ -5,12 +5,12 @@ function isArrayOrString (value) {
   return false
 }
 
-function checkPermission (route, store, router) {
-  return route.matched.every(record => {
+function checkAuth (route, store, next) {
+  let canContinue = route.matched.every(record => {
     const auth = record.meta.auth
     if (auth) {
       if (store.getters['twin/auth/isAuthenticated'] === false) {
-        router.push({
+        next({
           name: 'login',
           query: { redirect: route.fullPath },
           replace: true
@@ -18,7 +18,7 @@ function checkPermission (route, store, router) {
 
         return false
       } else if (isArrayOrString(auth) && store.getters['twin/auth/checkAcl'](auth)) {
-        router.push({
+        next({
           name: 'notAllowed'
         })
 
@@ -26,7 +26,7 @@ function checkPermission (route, store, router) {
       }
     } else if (auth === false) {
       if (store.getters['twin/auth/isAuthenticated']) {
-        router.push({
+        next({
           name: 'home',
           replace: true
         })
@@ -37,25 +37,20 @@ function checkPermission (route, store, router) {
 
     return true
   })
+
+  if (canContinue) next()
 }
 
 export default async ({ router, store, Vue, urlPath }) => {
   router.beforeEach((to, from, next) => {
-    if (checkPermission(to, store, { push: next })) {
-      next()
-    }
-  })
-
-  if (process.env.TWIN_SPLASHSCREEN) {
-    store.dispatch('twin/auth/loadUser')
-      .finally(() => {
-        checkPermission(router.resolve(urlPath).route, store, router)
+    if (store.getters['twin/auth/isAuthenticated'] === null) {
+      store.dispatch('twin/auth/loadUser')
+      .finally( () => {
+        checkAuth(to, store, next)
       })
       .catch(() => {})
-  } else {
-    try {
-      await store.dispatch('twin/auth/loadUser')
-    } catch {
+    } else {
+      checkAuth(to, store, next)
     }
-  }
+  })
 }

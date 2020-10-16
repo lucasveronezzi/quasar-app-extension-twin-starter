@@ -29,7 +29,7 @@ export default class {
     this.axiosInstance = axiosInstance
 
     this.mocks = []
-    
+
     this.mockingEnabled = true
 
     this.delay = delay

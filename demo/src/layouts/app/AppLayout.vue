@@ -1,18 +1,14 @@
 <template>
   <q-layout view="lHh Lpr lFf" >
-      <template v-if="authenticated">
-      <app-header :leftDrawer="leftDrawerOpen" @clickLeftDrawer="leftDrawerOpen = $event"/>
+    <app-header :leftDrawer="leftDrawerOpen" @clickLeftDrawer="leftDrawerOpen = $event"/>
 
-      <app-left-menu v-model="leftDrawerOpen"/>
+    <app-left-menu v-model="leftDrawerOpen"/>
 
-      <q-page-container>
-        <t-container-header v-if="!$q.platform.is.mobile" />
+    <q-page-container>
+      <t-container-header v-if="!$q.platform.is.mobile" />
 
-        <router-view />
-      </q-page-container>
-    </template>
-
-    <splashscreen-spinner v-else />
+      <router-view />
+    </q-page-container>
   </q-layout>
 </template>
 
@@ -20,12 +16,11 @@
 import TContainerHeader from 'twin-starter/components/TContainerHeader.vue'
 import AppHeader from './AppHeader.vue'
 import AppLeftMenu from './AppLeftMenu.vue'
-import SplashscreenSpinner from 'components/general/SplashscreenSpinner.vue'
 
 export default {
   name: 'AppLayout',
 
-  components: { TContainerHeader, AppHeader, AppLeftMenu, SplashscreenSpinner },
+  components: { TContainerHeader, AppHeader, AppLeftMenu },
 
   data () {
     return {
@@ -33,12 +28,15 @@ export default {
     }
   },
 
-  computed: {
-    authenticated () {
-      return this.$store.getters['twin/auth/isAuthenticated']
-    }
+  beforeCreate() {
+    console.log("teste")
   },
 
+  beforeRouteEnter () {
+    console.log("teste enter route")
+  },
+
+  // This is needed if you are using PreFetch
   beforeRouteUpdate (to, from, next) {
     if (this.$q.platform.is.mobile) { this.leftDrawerOpen = false }
 

@@ -21,6 +21,12 @@ module.exports = async function (api) {
     prompts: { ...routeApi, ...api.prompts }
   })
 
+  if (api.prompts.splashscreen) {
+    api.renderFile('./templates/App.vue', 'src/App.vue', {
+      prompts: api.prompts
+    })
+  }
+
   var file = null
 
   file = helper.renderIfNotExist(api, 'css/app.sass', /app\./)
