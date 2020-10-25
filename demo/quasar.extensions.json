@@ -1,5 +1,6 @@
 {
   "@lucasveronezzi/twin-starter": {
+    "useModules": true,
     "baseUrl": "http://localhost/api",
     "apiClientId": "",
     "apiClientSecret": "",

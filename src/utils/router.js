@@ -5,19 +5,38 @@ const prefixRoutes = function (prefix, routes) {
   })
 }
 
-const authRoutes = [{
-  path: '/',
-  component: () => import('layouts/auth/AuthLayout'),
-  meta: { auth: false },
-  children: [
-    { name: 'login', path: '/login', component: () => import('pages/Auth/LoginPage') },
+const authRoutes = []
 
-    { name: 'register', path: '/register', component: () => import('pages/Auth/RegisterPage') },
+if (process.env.TWIN_USE_MODULES) {
+  authRoutes.push({
+    path: '/',
+    component: () => import('modules/Auth/layouts/AuthLayout'),
+    meta: { auth: false },
+    children: [
+      { name: 'login', path: '/login', component: () => import('modules/Auth/pages/LoginPage') },
 
-    { name: 'forgotPassword', path: '/password/forget', component: () => import('pages/Auth/ForgotPasswordPage') },
+      { name: 'register', path: '/register', component: () => import('modules/Auth/pages/RegisterPage') },
 
-    { name: 'resetPassword', path: '/password/reset', component: () => import('pages/Auth/ResetPasswordPage') }
-  ]
-}]
+      { name: 'forgotPassword', path: '/password/forget', component: () => import('modules/Auth/pages/ForgotPasswordPage') },
+
+      { name: 'resetPassword', path: '/password/reset', component: () => import('modules/Auth/pages/ResetPasswordPage') }
+    ]
+  })
+} else {
+  authRoutes.push({
+    path: '/',
+    component: () => import('layouts/Auth/AuthLayout'),
+    meta: { auth: false },
+    children: [
+      { name: 'login', path: '/login', component: () => import('pages/Auth/LoginPage') },
+
+      { name: 'register', path: '/register', component: () => import('pages/Auth/RegisterPage') },
+
+      { name: 'forgotPassword', path: '/password/forget', component: () => import('pages/Auth/ForgotPasswordPage') },
+
+      { name: 'resetPassword', path: '/password/reset', component: () => import('pages/Auth/ResetPasswordPage') }
+    ]
+  })
+}
 
 export { prefixRoutes, authRoutes }

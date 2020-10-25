@@ -1,6 +1,7 @@
 import { axiosAPI } from 'boot/axios'
 import { runLoginCallBack, runLoadUserCallback } from 'twin-starter/utils/auth'
 import { Cookies, LocalStorage } from 'quasar'
+import { resetStateModules } from 'twin-starter/utils/modules-static'
 
 function removeToken () {
   if (process.env.TWIN_AUTH_SCHEME_SEND_TOKEN === 'header') {
@@ -129,16 +130,20 @@ export function verify ({ state, commit }) {
   return axiosAPI.post(process.env.TWIN_API_EMAIL_VERIFIY_RESEND)
 }
 
-export function logout ({ commit }, wihtouApi = false) {
-  if (wihtouApi) {
-    removeToken()
-    commit('setUser', false)
-    return true
+export async function logout ({ commit }, wihtouApi = false) {
+  var response = null
+
+  if (!wihtouApi) {
+    response = await axiosAPI.post(process.env.TWIN_API_LOGOUT)
   }
 
-  return axiosAPI.post(process.env.TWIN_API_LOGOUT)
-    .then(() => {
-      removeToken()
-      commit('setUser', false)
-    })
+  removeToken()
+
+  if (process.env.TWIN_USE_MODULES) {
+    resetStateModules()
+  }
+
+  commit('setUser', false)
+
+  return response
 }

@@ -43,7 +43,7 @@ export default {
       register: 'Registre-se'
     },
 
-    passowrdReset: {
+    passwordReset: {
       welcome: 'Bem vindo, ',
       subTitle: 'Digite sua nova senha e confirme-a.',
       passwordChangedMessage: 'Senha alterada com sucesso.',

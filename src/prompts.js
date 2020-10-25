@@ -13,6 +13,13 @@ const routeApi = require('./utils/api.default.json')
 module.exports = function () {
   return [
     {
+      name: 'useModules',
+      type: 'confirm',
+      message: 'Use folder-by-type (Modules) to project structure',
+      default: true
+    },
+
+    {
       name: 'baseUrl',
       type: 'input',
       required: true,

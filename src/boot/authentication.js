@@ -6,10 +6,11 @@ function isArrayOrString (value) {
 }
 
 function checkAuth (route, store, next) {
+  // console.log(route.matched)
   let canContinue = route.matched.every(record => {
     const auth = record.meta.auth
     if (auth) {
-      if (store.getters['twin/auth/isAuthenticated'] === false) {
+      if (store.getters['Auth/isAuthenticated'] === false) {
         next({
           name: 'login',
           query: { redirect: route.fullPath },
@@ -17,7 +18,7 @@ function checkAuth (route, store, next) {
         })
 
         return false
-      } else if (isArrayOrString(auth) && store.getters['twin/auth/checkAcl'](auth)) {
+      } else if (isArrayOrString(auth) && store.getters['Auth/checkAcl'](auth)) {
         next({
           name: 'notAllowed'
         })
@@ -25,7 +26,7 @@ function checkAuth (route, store, next) {
         return false
       }
     } else if (auth === false) {
-      if (store.getters['twin/auth/isAuthenticated']) {
+      if (store.getters['Auth/isAuthenticated']) {
         next({
           name: 'home',
           replace: true
@@ -43,8 +44,8 @@ function checkAuth (route, store, next) {
 
 export default async ({ router, store, Vue, urlPath }) => {
   router.beforeEach((to, from, next) => {
-    if (store.getters['twin/auth/isAuthenticated'] === null) {
-      store.dispatch('twin/auth/loadUser')
+    if (store.getters['Auth/isAuthenticated'] === null) {
+      store.dispatch('Auth/loadUser')
       .finally( () => {
         checkAuth(to, store, next)
       })

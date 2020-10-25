@@ -1,9 +1,9 @@
-import { authRoutes /* prefixRoutes */ } from 'twin-starter/utils/router'
+<% if (!prompts.useModules) { %>import { authRoutes /* prefixRoutes */ } from 'twin-starter/utils/router'<% } %>
 
 const routes = [
   {
     path: '/',
-    component: () => import('layouts/app/AppLayout.vue'),
+    component: () => import('layouts/AppLayout.vue'),
     meta: { auth: true },
     children: [
 
@@ -23,9 +23,9 @@ const routes = [
 
     ]
   },
-
-  // If you want to add the auth routes manually, remove this line
-  ...authRoutes,
+  <% if (!prompts.useModules) { %>
+     // If you want to add the auth routes manually, remove this line
+    ...authRoutes,<% } %>
 
   // Route when user is logged but doens't have permission
   // You can change the route path and component but DON'T CHANGE THE ROUTE NAME

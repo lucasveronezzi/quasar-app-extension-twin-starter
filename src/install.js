@@ -12,6 +12,47 @@ const helper = require('./utils/files')
 
 const routeApi = require('./utils/api.default.json')
 
+function renderModules (api) {
+  const useModules = api.prompts.useModules
+
+  const modules = [
+    'Auth/layouts/AuthLayout.vue',
+    'Auth/pages/LoginPage.vue',
+    'Auth/pages/RegisterPage.vue',
+    'Auth/pages/ForgotPasswordPage.vue',
+    'Auth/pages/ResetPasswordPage.vue',
+    'Auth/store/actions.js',
+    'Auth/store/getters.js',
+    'Auth/store/mutations.js',
+    'Auth/store/state.js',
+    'Auth/store/index.js'
+  ]
+
+  modules.forEach( file => {
+    api.renderFile('./templates/modules/' + file, 'src/' + addPrefixToPath(file, useModules), { prompts: api.prompts })
+  })
+
+  if (useModules) {
+    api.renderFile('./templates/modules/boot/modules.js', 'src/boot/modules.js', { prompts: api.prompts })
+    api.renderFile('./templates/modules/Auth/router/index.js', 'src/modules/Auth/router/index.js', { prompts: api.prompts })
+  }
+  
+}
+
+function addPrefixToPath (value, modules) {
+  if (modules) {
+    return 'modules/' + value
+  } else {
+    let x = value.split('/', 3)
+    if (x[1] === 'layouts') {
+      return x[1] + '/' + x[2]
+    } else {
+      return x[1] + '/' + x[0] + '/' + x[2]
+    }
+    
+  }
+}
+
 module.exports = async function (api) {
   api.compatibleWith('quasar', '^1.8.5')
 
@@ -20,6 +61,8 @@ module.exports = async function (api) {
   api.render('./templates/default', {
     prompts: { ...routeApi, ...api.prompts }
   })
+
+  renderModules(api)
 
   if (api.prompts.splashscreen) {
     api.renderFile('./templates/App.vue', 'src/App.vue', {

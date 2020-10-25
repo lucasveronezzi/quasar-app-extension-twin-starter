@@ -2,20 +2,20 @@
   <div id="q-app">
     <router-view v-if="authenticated !== null" />
 
-    <splashscreen-spinner v-else />
+    <the-splashscreen-spinner v-else />
   </div>
 </template>
 <script>
-import SplashscreenSpinner from 'components/general/SplashscreenSpinner.vue'
+import TheSplashscreenSpinner from 'components/General/TheSplashscreenSpinner.vue'
 
 export default {
   name: 'App',
 
-  components: { SplashscreenSpinner },
+  components: { TheSplashscreenSpinner },
 
   computed: {
     authenticated () {
-      return this.$store.getters['twin/auth/isAuthenticated']
+      return this.$store.getters['Auth/isAuthenticated']
     }
   }
 }

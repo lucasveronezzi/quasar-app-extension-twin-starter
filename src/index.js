@@ -66,6 +66,8 @@ function registerProcessEnv (conf, api) {
 
   conf.build.env = { ...dotEnv }
 
+  conf.build.env[addPrefix('USE_MODULES')] = prompts.useModules
+
   conf.build.env[addPrefix('SPLASHSCREEN')] = prompts.splashscreen
   conf.build.env[addPrefix('AUTH_SCHEME_SEND_TOKEN')] = prompts.schemeSendToken
   conf.build.env[addPrefix('AUTH_SCHEME')] = prompts.authScheme
@@ -84,12 +86,15 @@ function addPrefix (name) {
   return 'TWIN_' + name
 }
 
-const chainWebpack = (ctx, chain) => {
+const chainWebpack = (api, chain) => {
   chain.resolve.alias.set('twin-starter', path.resolve(__dirname, './'))
+  if (api.prompts.useModules) {
+    chain.resolve.alias.set('modules', api.resolve.src('modules'))
+  }
 }
 
 module.exports = function (api) {
-  api.chainWebpack((chain) => chainWebpack(api.ctx, chain))
+  api.chainWebpack((chain) => chainWebpack(api, chain))
 
   api.extendQuasarConf(extendConf)
 }

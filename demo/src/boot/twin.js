@@ -13,7 +13,7 @@ export default ({ store }) => {
     //  role.permissions.forEach( permission => permissions.push(permission) )
     // })
     // 
-    // store.commit('twin/auth/setPermissions', permissions)
+    // store.commit('auth/setPermissions', permissions)
     // 
     // If you don't want save the roles in user, you can delete to not keep memory allocation without need
     // 
@@ -35,6 +35,6 @@ export default ({ store }) => {
     // 
     // If the login route don't return the data from user you can call loadUser to load the user data
     //
-    // await store.dispatch('twin/auth/loadUser')
+    // await store.dispatch('auth/loadUser')
   })
 }

@@ -18,26 +18,27 @@ export default ({ Vue, store }) => {
         .finally(() => {
           this.endLoad()
         })
+
     },
 
     auth: {
-      register: (data) => store.dispatch('twin/auth/register', data),
+      register: (data) => store.dispatch('Auth/register', data),
 
-      login: (data) => store.dispatch('twin/auth/login', data),
+      login: (data) => store.dispatch('Auth/login', data),
 
-      logout: () => store.dispatch('twin/auth/logout'),
+      logout: () => store.dispatch('Auth/logout'),
 
-      verify: (token) => store.dispatch('twin/auth/verify', token),
+      verify: (token) => store.dispatch('Auth/verify', token),
 
-      passwordForgot: (data) => store.dispatch('twin/auth/passwordForgot', data),
+      passwordForgot: (data) => store.dispatch('Auth/passwordForgot', data),
 
-      passwordReset: (data) => store.dispatch('twin/auth/passwordReset', data),
+      passwordReset: (data) => store.dispatch('Auth/passwordReset', data),
 
-      checkAcl: (roles) => store.getters['twin/auth/checkAcl'](roles),
+      checkAcl: (roles) => store.getters['Auth/checkAcl'](roles),
 
-      setToken: (data) => store.dispatch('twin/auth/setToken', data),
+      setToken: (data) => store.dispatch('Auth/setToken', data),
 
-      fetch: () => store.dispatch('twin/auth/fetch')
+      fetch: () => store.dispatch('Auth/fetch')
     }
   }
 
