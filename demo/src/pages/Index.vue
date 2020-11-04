@@ -1,5 +1,5 @@
 <template>
-  <app-page class="flex flex-center" :isLoading="isLoading">
+  <base-page class="flex flex-center" :isLoading="isLoading">
     <img
       alt="Quasar logo"
       src="~assets/quasar-logo-full.svg"
@@ -17,7 +17,7 @@
     {{$store.state.teste}}
 
     <q-btn label="teste" @click="teste" />
-  </app-page>
+  </base-page>
 </template>
 
 <script>

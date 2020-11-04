@@ -20,7 +20,7 @@ export default ({ router, Vue }) => {
 
         const found = router.resolve(fullPath).route
 
-        if (found.matched[0].path !== '*') {
+        if (found.matched[0].path !== '*' && found.name !== 'home') {
           routes.push({
             path: fullPath,
             title: found.meta.breadcrumb || found.meta.title,
