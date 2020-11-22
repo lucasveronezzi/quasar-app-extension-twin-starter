@@ -39,7 +39,7 @@
         </q-card-section>
 
         <q-card-section align="center">
-          <span class="text-subtitle-1">{{ $twin.i18n.t('page.passwordReset.redirect') }}</span
+          <span class="text-subtitle-1">{{ $twin.i18n.t('page.passwordReset.redirectMessage') }}</span
           >
           <br />
           <span class="text-h6 ">{{ timer }}</span>

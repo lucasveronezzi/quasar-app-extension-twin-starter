@@ -36,12 +36,7 @@ function resolveDataUser (commit, data) {
 }
 
 export function login ({ state, commit }, data) {
-  return axiosAPI.post(process.env.TWIN_API_LOGIN, Object.assign({
-    grant_type: 'password',
-    client_id: process.env.API_CLIENT_ID,
-    client_secret: process.env.API_CLIENT_SECRET,
-    scope: '*'
-  }, data), { ignoreCode: [400, 401] })
+  return axiosAPI.post(process.env.TWIN_API_LOGIN, data, { ignoreCode: [400, 401] })
     .then(async response => {
       resolveDataUser(commit, response.data)
 

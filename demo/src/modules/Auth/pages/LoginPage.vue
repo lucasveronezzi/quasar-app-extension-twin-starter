@@ -1,11 +1,11 @@
 <template>
-  <q-form @submit="submit">
+  <login-form :data="form" v-slot="{ loading }" @clear="form.password = ''">
     <q-card class="fit text-center">
       <q-img src="~assets/icon.svg" style="max-width: 150px" />
 
       <q-card-section class="q-gutter-y-md">
         <q-input
-          v-model="login"
+          v-model="form.login"
           outlined
           autocomplete
           bg-color="white"
@@ -17,7 +17,7 @@
           </template>
         </q-input>
 
-        <app-input-password v-model="password" />
+        <app-input-password v-model="form.password" />
       </q-card-section>
 
       <q-card-actions vertical class="text-caption text-grey-9 q-pa-md q-mb-lg">
@@ -48,60 +48,25 @@
         </div>
       </q-card-actions>
     </q-card>
-  </q-form>
+  </login-form>
 </template>
 
 <script>
 import AppInputPassword from 'components/App/AppInputPassword.vue'
+import LoginForm from '../components/LoginForm.vue'
 
 export default {
   name: 'LoginPage',
 
-  components: { AppInputPassword },
+  components: { AppInputPassword, LoginForm },
 
-  data () {
-    return {
-      login: '',
-      password: '',
-      isPwd: true,
-      loading: false
-    }
-  },
-
-  methods: {
-    submit () {
-      this.loading = true
-
-      this.$store.dispatch('Auth/login', { username: this.login, password: this.password })
-        .then(async response => {
-          
-          this.loading = false
-
-          if (this.$route.query.redirect) {
-            this.$router.replace({ path: this.$route.query.redirect })
-          } else {
-            this.$router.replace({ name: 'home' })
-          }
-        })
-        .catch(error => {
-          this.loading = false
-
-          if (error.response) {
-            this.password = ''
-
-            if (error.response.status === 400) {
-              this.$q.notify({
-                type: 'negative',
-                message: 'Usuário e/ou senha invalidos.'
-              })
-            } else if (error.response.status === 401) {
-              this.$q.notify({
-                type: 'negative',
-                message: 'Crendeciais do servidor incorretas'
-              })
-            }
-          }
-        })
+  data() {
+    return { 
+      form: {
+        username: '',
+        password: '',
+      },
+      isPwd: true
     }
   }
 }

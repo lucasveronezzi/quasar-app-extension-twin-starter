@@ -17,6 +17,7 @@ function renderModules (api) {
 
   const modules = [
     'Auth/layouts/AuthLayout.vue',
+    'Auth/components/LoginForm.vue',
     'Auth/pages/LoginPage.vue',
     'Auth/pages/RegisterPage.vue',
     'Auth/pages/ForgotPasswordPage.vue',

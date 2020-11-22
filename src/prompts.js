@@ -28,22 +28,6 @@ module.exports = function () {
     },
 
     {
-      name: 'apiClientId',
-      type: 'input',
-      required: false,
-      message: 'API Client ID to login (This will be saved in your .env and .env.prod, and you can change them any time)',
-      default: ''
-    },
-
-    {
-      name: 'apiClientSecret',
-      type: 'input',
-      required: false,
-      message: 'API Client Secret to login (This will be saved in your .env and .env.prod, and you can change them any time)',
-      default: ''
-    },
-
-    {
       name: 'changeRoutesApi',
       type: 'list',
       message: 'Do you wish to change the api authentication URLs (login, reset etc...)?',

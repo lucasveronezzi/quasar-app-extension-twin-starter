@@ -2,7 +2,7 @@
     {
         "url": "/auth/login",
         "status": 200,
-        "activated": true,
+        "activated": false,
         "data": {
             "token": "551DASGFSA51FAS51SA1FAS",
             "expires_in": "3600"
@@ -11,7 +11,7 @@
 
     {
         "url": "/auth/login",
-        "activated": false,
+        "activated": true,
         "status": 401,
         "message": "Mock Request Error 400",
         "data": {
